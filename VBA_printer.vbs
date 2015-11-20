@@ -62,7 +62,7 @@ Sub Main()
     Dim sBuf As String
     Dim myarray() As String
 
-    FileName = ""
+    FileName = "[DATA FILE]"
 
     ' does the file exist?  simpleminded test:
     If Len(Dir$(FileName)) = 0 Then
