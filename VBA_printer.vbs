@@ -6,7 +6,7 @@ Dim i As Integer
         Set wdApp = GetObject(, "Word.Application")
 		
         'Template here:
-        wdApp.Documents.add Template:="YOUR TEMPLATE"
+        wdApp.Documents.add Template:="[YOUR TEMPLATE]"
 		
         'Do not open word windows
         wdApp.ScreenUpdating = False
