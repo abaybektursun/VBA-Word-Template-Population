@@ -1,21 +1,24 @@
-Public Sub replace_print(ByRef myarray() As String)
+Public Sub Replace_print(ByRef myarray() As String)
 Dim i As Integer
 		'Add a template
         Dim wdApp As Word.Application
             
         Set wdApp = GetObject(, "Word.Application")
+		
         'Template here:
-        wdApp.Documents.add Template:=""
-        'do not open word windows!
+        wdApp.Documents.add Template:="YOUR TEMPLATE"
+		
+        'Do not open word windows
         wdApp.ScreenUpdating = False
+        wdApp.Visible = False
+        wdApp.DisplayAlerts = wdAlertsNone
         
 		'Replacements
-    
         Selection.Find.ClearFormatting
         Selection.Find.Replacement.ClearFormatting
         
         With Selection.Find
-            .Text = "String You Want To Replace"
+            .Text = "[String You Want To Replace]"
             .Replacement.Text = myarray(0)
             .Forward = True
             .Wrap = wdFindContinue
@@ -28,22 +31,31 @@ Dim i As Integer
         End With
         Selection.Find.Execute Replace:=wdReplaceAll        
     
-        'Save as new file
-
+        'You can save the file if you want:
+		
         'Dim dateTimeNow As String, newFileName As String
         'dateTimeNow = Format(Now(), "yyyy_MM_dd_hh_mm_ss")
-        'newFileName = "G:\Information Technology\Abay\Hendrix\card printer\Python\docs\st\" & dateTimeNow & i & ".docx"
+        'newFileName = "DOC" & dateTimeNow & i & ".docx"
         'wdApp.ActiveDocument.SaveAs newFileName
         
-        'PRINT
+        'Set The Printer
         Dim strPrinter As String
         wdApp.ActivePrinter = "[YOUR PRINTER]"
-        ' The original line to print the document
+		
+        'Print the document
         wdApp.ActiveDocument.PrintOut
+		'Keep the project derectory clean be closing the project
+		With wdApp
+            'Loop Through open documents
+            Do Until .Documents.Count = 0
+                'Close no save
+                .Documents(1).Close SaveChanges:=wdDoNotSaveChanges
+            Loop
+        End With
 End Sub
 
 
-Sub ReadAsciiFile()
+Sub Main()
 
     Dim FileName As String
     Dim FileNum As Integer
@@ -67,10 +79,10 @@ Sub ReadAsciiFile()
         myarray = Split(sBuf, ",")
         Debug.Print ""
         Debug.Print "/---------------------------------------------------"
-        Debug.Print myarray(0), myarray(1), myarray(2), myarray(3), myarray(4), myarray(5), myarray(6), myarray(7), myarray(8), myarray(9), myarray(10); myarray(11)
+        Debug.Print myarray(0), myarray(1), myarray(2), myarray(3), myarray(4)
         Debug.Print "---------------------------------------------------\"
         Debug.Print ""
-        Main myarray:=myarray
+        replace_print myarray:=myarray
     Loop
 
     ' close the file
