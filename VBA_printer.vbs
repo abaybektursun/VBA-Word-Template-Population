@@ -25,15 +25,15 @@ Dim i As Integer
         data_index = data_index + 1
         
         With Selection.Find
-            .Text = CStr(element)
-            .Replacement.Text = dataArray(data_index)
-            .Forward = True
-            .Wrap = wdFindContinue
-            .Format = False
-            .MatchCase = False
-            .MatchWholeWord = False
-            .MatchWildcards = False
-            .MatchSoundsLike = False
+            .Text              = CStr(element)
+            .Replacement.Text  = dataArray(data_index)
+            .Forward           = True
+            .Wrap              = wdFindContinue
+            .Format            = False
+            .MatchCase         = False
+            .MatchWholeWord    = False
+            .MatchWildcards    = False
+            .MatchSoundsLike   = False
             .MatchAllWordForms = False
         End With
         Selection.Find.Execute Replace:=wdReplaceAll
@@ -76,13 +76,13 @@ Sub VBA_printer()
     Dim printer_name  As String
     
     ' ! Specify path to the template document
-    docPath     = ""
+    docPath       = ""
     ' ! Specify path to the data
-    dataPath     = ""
+    dataPath      = ""
     ' ! Specify data file name
-    fileName = ""
+    fileName      = ""
     ' ! Specify template document Name
-    tempDocName  = ""
+    tempDocName   = ""
     ' ! Specify printer
     printer_name  = ""
 
@@ -90,7 +90,7 @@ Sub VBA_printer()
     ' fieldsArray needs to be in order coresponding to the dataArray
     fieldsArray = Split("", ",")
     ' Example:
-    'fieldsArray = Split("<<PROVIDER_NBR>>,<<IRS_NBR>>,<<NPI_NBR>>,<<APP_YYYYMMDD>>,<<PREV_YYYYMMDD>>,<<YMD_RECRED>>,<<Title>>,<<FirstName>>,<<LASTNAME>>,<<Letter_LastName>>,<<DOB>>,<<DEGREE>>,<<DEA_NUMBER>>,<<LICENSE_NBR>>,<<OFFICE_NBR>>,<<CERTIFICATION>>,<<HOSP_PRIV>>,<<LISTING>>,<<PHO_AFFILIATION>>,<<PADDRESS>>,<<PCITY>>,<<PSTATE>>,<<PZIP>>,<<PPHONE_NBR>>,<<PFAX_NBR>>,<<PEMAIL>>,<<PMANAGER>>,<<PNAME>>,<<BADDRESS>>,<<BCITY>>,<<BSTATE>>,<<BZIP>>,<<BPHONE_NBR>>", ",")
+    'fieldsArray = Split("[<ID>],[<FNAME>],[<LNAME>],[<SuperPowers>],[<SkillLevel>]", ",")
     
     ' Does the file exist?
     If Len(Dir$(fileName)) = 0 Then
